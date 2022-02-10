@@ -1,0 +1,6 @@
+require('plugins')
+require('conf')
+require('conf.mappings')
+require('conf.ui')
+require('conf.nav')
+require('conf.languages')
