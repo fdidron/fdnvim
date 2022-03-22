@@ -1,3 +1,4 @@
+--- Global settings
 local g        = vim.g
 local opt      = vim.opt
 
@@ -6,5 +7,8 @@ opt.mouse      = "a"
 
 opt.autoread   = true
 opt.expandtab  = true
---opt.tabstop    = 4
---opt.shiftwidth = 4
+opt.tabstop    = 4
+opt.shiftwidth = 4
+
+opt.number = true
+opt.termguicolors = true
