@@ -16,6 +16,7 @@ M.toggle_variant = function()
     end
 
     vim.cmd("colorscheme ayu-" .. scheme)
+    require'ui.statusline'.setup()
 end
 
 M.setup = function()

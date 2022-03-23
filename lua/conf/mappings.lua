@@ -5,11 +5,11 @@ local buf = vim.lsp.buf
 --Nav
 --nmap("<Leader>d", ":SidebarNvimToggle<CR>", "silent")
 nmap("<Leader>f", ":Telescope find_files<CR>", "silent")
-nmap("<Leader><Leader>f", ":Telescope file_browser<CR>", "silent")
---nmap("<Leader>o", ":Telescope buffers<CR>", "silent")
+nmap("<Leader><Leader>f", ":Telescope file_browser path=%:p:h<CR>", "silent")
+nmap("<Leader>b", ":Telescope buffers<CR>", "silent")
 --nmap("<Leader>b", ":BufferPick<CR>", "silent")
 --nmap("<Leader>c", ":Cheat<CR>", "silent")
---nmap("<Leader>i", "gg=G", "silent")
+nmap("<Leader>i", "gg=G``", "silent")
 --nmap("<Leader>q", ":bw!<CR>", "silent")
 
 nmap("<Leader><Tab>", "<C-^>", "silent")

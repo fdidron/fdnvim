@@ -11,4 +11,8 @@ opt.tabstop    = 4
 opt.shiftwidth = 4
 
 opt.number = true
+
 opt.termguicolors = true
+
+opt.list = true
+opt.listchars:append("space:⋅")
