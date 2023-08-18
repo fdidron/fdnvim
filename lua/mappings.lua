@@ -18,3 +18,6 @@ vim.keymap.set('n', '<Leader>l', '<C-w>l')
 vim.keymap.set('n', '<Leader><Leader>j', '<C-w>s')
 vim.keymap.set('n', '<Leader><Leader>l', '<C-w>v')
 
+-- LazyGit
+vim.keymap.set('n', '<Leader>g', ':LazyGit<CR>')
+
