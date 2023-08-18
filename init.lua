@@ -1,3 +1,3 @@
-require('plugins/packer_init')
-require('conf/settings')
-require('conf/mappings')
+require('settings')
+require('mappings')
+require('plugins')

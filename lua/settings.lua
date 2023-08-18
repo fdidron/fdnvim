@@ -1,4 +1,4 @@
---- Global settings
+-- Global settings
 local g        = vim.g
 local opt      = vim.opt
 
@@ -11,8 +11,4 @@ opt.tabstop    = 4
 opt.shiftwidth = 4
 
 opt.number = true
-
 opt.termguicolors = true
-
-opt.list = true
-opt.listchars:append("space:⋅")
