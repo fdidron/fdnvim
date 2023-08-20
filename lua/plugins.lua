@@ -43,6 +43,7 @@ require("lazy").setup({
     },
     -- UI
     "Shatur/neovim-ayu",
+    "nvim-lualine/lualine.nvim",
     {
         'nvim-telescope/telescope.nvim', tag = '0.1.2',
         dependencies = { 'nvim-lua/plenary.nvim' }

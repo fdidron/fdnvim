@@ -1,5 +1,9 @@
 # My nvim config
 
-A config I use for my daily coding life, including support for Ruby, Typescript, Go, C, Elixir, C#.
+A config I use for my daily coding life. 
 
-##
+## Requirements
+
+- fzf for telescope
+- lazygit
+
