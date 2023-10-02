@@ -1,4 +1,6 @@
 require('settings')
-require('mappings')
 require('plugins')
+require('mappings')
 require('line')
+
+require('lsp')

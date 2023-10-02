@@ -16,19 +16,29 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     -- LSP
     "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
     "hrsh7th/nvim-cmp",
-    "hrsh7th/cmp-nvim-lsp",
-    "github/copilot.vim",
+    "zbirenbaum/copilot.lua",
+    "sbdchd/neoformat",
     {
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
-        opts = {
-            -- your configuration comes here
-            -- or leave it empty to use the default settings
-            -- refer to the configuration section below
-        },
+        opts = {},
+    },
+    {
+    'VonHeikemen/lsp-zero.nvim',
+        branch = 'v2.x',
+        dependencies = {
+            -- LSP Support
+            {'neovim/nvim-lspconfig'},             -- Required
+            {'williamboman/mason.nvim'},           -- Optional
+            {'williamboman/mason-lspconfig.nvim'}, -- Optional
+
+            -- Autocompletion
+            {'hrsh7th/nvim-cmp'},     -- Required
+            {'hrsh7th/cmp-nvim-lsp'}, -- Required
+            {'L3MON4D3/LuaSnip'},     -- Required
+        }
     },
     { "folke/neoconf.nvim", cmd = "Neoconf" },
     "folke/neodev.nvim",
@@ -42,7 +52,7 @@ require("lazy").setup({
         end
     },
     -- UI
-    "Shatur/neovim-ayu",
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
     "nvim-lualine/lualine.nvim",
     {
         'nvim-telescope/telescope.nvim', tag = '0.1.2',
@@ -59,22 +69,17 @@ require("lazy").setup({
             local configs = require("nvim-treesitter.configs")
 
             configs.setup({
-                ensure_installed = { "c", "lua", "vim", "vimdoc", "go", "svelte", "typescript", "javascript", "html" },
+                ensure_installed = { "c", "lua", "vim", "vimdoc", "go", "svelte", "typescript", "javascript", "html", "rust" },
                 sync_install = false,
-                highlight = { enable = true },
-                indent = { enable = true },
+                auto_install = true,
+                highlight = { enable = true }
             })
         end
     },
-    {
-        'stevearc/oil.nvim',
-        opts = {},
-        -- Optional dependencies
-        dependencies = { "nvim-tree/nvim-web-devicons" },
-    },
-    "declancm/cinnamon.nvim",
+    { 'echasnovski/mini.nvim', version = false },
     -- PM
     "ahmedkhalf/project.nvim",
+    "notjedi/nvim-rooter.lua",
 
     --Git
     "lewis6991/gitsigns.nvim",
@@ -94,78 +99,29 @@ local telescope = require('telescope')
 
 -- Mason
 require("mason").setup()
-require("mason-lspconfig").setup()
-require("mason-lspconfig").setup_handlers {
-    -- The first entry (without a key) will be the default handler
-    -- and will be called for each installed server that doesn't have
-    -- a dedicated handler.
-    function (server_name) -- default handler (optional)
-        require("lspconfig")[server_name].setup {}
-    end
 
-}
-
--- Ayu Theme
-local ayu = require("ayu")
-ayu.setup({
-    mirage = true,
-    overrides = {},
-})
-ayu.colorscheme()
-
+vim.cmd("colorscheme catppuccin-mocha")
 -- Project
 require("project_nvim").setup()
+require("nvim-rooter").setup()
 
 -- Telescope
 telescope.load_extension('projects')
 telescope.load_extension('file_browser')
 telescope.load_extension('fzf')
 
--- Smooth scrolling
-require('cinnamon').setup()
-
 --Git
 require('gitsigns').setup()
 
--- Autocompletion
-local cmp = require "cmp"
-
-cmp.setup {
-    mapping = cmp.mapping.preset.insert({
-        ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
-        ['<C-d>'] = cmp.mapping.scroll_docs(4), -- Down
-        -- C-b (back) C-f (forward) for snippet placeholder navigation.
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<CR>'] = cmp.mapping.confirm {
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
-        },
-        ['<Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_next_item()
-            else
-                fallback()
-            end
-        end, { 'i', 's' }),
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item()
-            else
-                fallback()
-            end
-        end, { 'i', 's' }),
-    }),
-    sources = {
-        { name = 'nvim_lsp' },
-    },
-}
-
-cmp.config.formatting = {
-    format = require("tailwindcss-colorizer-cmp").formatter
-}
-
--- Oil
-require("oil").setup()
-
 -- Leap
 require("leap").add_default_mappings()
+
+-- Mini
+require("mini.animate").setup()
+
+require("copilot").setup({
+    suggestion = {
+        enable = true,
+        auto_trigger = true,
+        keymap = { accept = "<C-Space>", dismiss = "<C-k>" } }
+})
